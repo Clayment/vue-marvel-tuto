@@ -7,28 +7,23 @@
 </template>
 
 <script>
-import HeroesData from "../data/heroes";
+import * as c from "../constants";
 
 export default {
   props: ["id"],
   data: function() {
     return {
-      HeroesData
+      hero: false
     };
   },
-  computed: {
-    hero: function() {
-      // Should use API if not already gotten
-      let heroes = HeroesData.data.results;
-      for (let i in heroes) {
-        if (heroes.hasOwnProperty(i)) {
-          if (heroes[i].id === parseInt(this.id, 10)) {
-            console.log(heroes[i]);
-            return heroes[i];
-          }
-        }
-      }
-      return false;
+  created: function() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData: function() {
+        fetch(`${c.API_CHARACTERS}/${this.id}?apikey=${c.API_KEY}`)
+        .then(response => response.json())
+        .then(json => this.hero = json.data.results[0]);
     }
   }
 };

@@ -4,10 +4,8 @@ import App from "./App.vue";
 import HeroList from "./components/HeroList.vue";
 import HeroSingle from "./components/HeroSingle.vue";
 
-import HeroesData from "./data/heroes.js";
-
 const routes = [
-  { path: "/", name: "list", component: HeroList, props: { HeroesData } },
+  { path: "/", name: "list", component: HeroList, props: {  } },
   { path: "/single/:id", component: HeroSingle, props: true }
 ];
 
