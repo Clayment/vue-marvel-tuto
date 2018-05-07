@@ -5,16 +5,27 @@
 </template>
 <script>
 import HeroItem from "./HeroItem.vue";
+import * as c from "../constants";
 
 export default {
   components: {
     HeroItem
   },
-  props: ["HeroesData", "toto"],
+  created: function() {
+    this.fetchData();
+  },
+  props: [],
   data: function() {
     return {
-      heroes: this.HeroesData.data.results
+      heroes: []
     };
+  },
+  methods: {
+    fetchData: function() {
+        fetch(`${c.API_CHARACTERS}?apikey=${c.API_KEY}&offset=${c.PAGINATION_DEFAULT_OFFSET}&limit=${c.PAGINATION_DEFAULT_LIMIT}`)
+        .then(response => response.json())
+        .then(json => this.heroes = json.data.results);
+    }
   }
 };
 </script>
