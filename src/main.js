@@ -6,6 +6,7 @@ import HeroSingle from "./components/HeroSingle.vue";
 
 const routes = [
   { path: "/", name: "list", component: HeroList, props: {  } },
+  { path: "/page/:num", component: HeroList, props: true },
   { path: "/single/:id", component: HeroSingle, props: true }
 ];
 
